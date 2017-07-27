@@ -34,7 +34,7 @@ class App extends Component {
 
   handleNameChange(event) {
     this.setState({
-      pilot: this.name.value
+      value: this.name.value
     })
   }
 
