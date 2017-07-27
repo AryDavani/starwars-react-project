@@ -10,7 +10,7 @@ class Form extends Component {
       <div className="container text-center">
         <form>
           <div className="form-group">
-            <input type="text" className="form-control" placeholder="What is your name, pilot?" value={ this.state.value } onChange={ this.handleNameChange }/>
+            <input type="text" className="form-control" placeholder="What is your name, pilot?" value={ this.props.pilot } onChange={ this.handleNameChange }/>
             <input type="submit" className="btn btn-primary" value="Submit" />
           </div>
         </form>

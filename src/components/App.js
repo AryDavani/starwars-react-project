@@ -12,7 +12,6 @@ class App extends Component {
 
     this.state = {
       vehicles: [],
-      value: '',
       pilot: ''
     };
 
@@ -34,7 +33,7 @@ class App extends Component {
 
   handleNameChange(event) {
     this.setState({
-      value: this.name.value
+      pilot: event.target.value
     })
   }
 
@@ -56,13 +55,16 @@ class App extends Component {
 
   componentDidMount() {
   fetch('https://swapi.co/api/vehicles/')
-  .then(result => (result.json()))
-  .then((json) => {
-    this.setState({
-      vehicles: json
+  .then(results => {
+      return results.json();
+    }).then(data => {
+      this.setState({
+        vehicles: data.results,
+      });
+      console.log("state", this.state.vehicles);
     })
-  })
-}
+  }
+
 
   // RENDER
   // Before you can map over the data you've fetched, you will first need to store that 'state' in a variable.
@@ -74,13 +76,18 @@ class App extends Component {
 
   render() {
 
-    // let vehicles = vehicles.map()
+    let vehiclesList = this.state.vehicles.map(function(vehicle, index) {
+      return <VehicleCard key={ index } vehicle={ vehicle } />
+    })
 
 
     return (
       <div className="App container-fluid">
         <Jumbotron />
-        <Form />
+        <Form props={ this.state }/>
+        <div className="flex">
+          { vehiclesList }
+        </div>
       </div>
     );
   }
